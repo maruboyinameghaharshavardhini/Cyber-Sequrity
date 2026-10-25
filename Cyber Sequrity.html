@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CyberShield - Cyber Security Awareness</title>
+
+
+    <style>
+        /* ==========================================
+           RESET
+        ========================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #06101d;
+            color: white;
+            line-height: 1.6;
+        }
+
+
+        /* ==========================================
+           NAVBAR
+        ========================================== */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: #040b14;
+
+            padding: 20px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid #18354e;
+        }
+
+        .logo {
+            color: #00e5ff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+
+            color: #b9c9d9;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .nav-links button:hover,
+        .nav-links button.active {
+            color: #00e5ff;
+        }
+
+
+        /* ==========================================
+           PAGE SYSTEM
+        ========================================== */
+
+        .page {
+            display: none;
+            min-height: 80vh;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+
+        /* ==========================================
+           CONTAINER
+        ========================================== */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+
+            font-size: 40px;
+
+            margin-bottom: 20px;
+
+            color: #00e5ff;
+        }
+
+        .section-text {
+            text-align: center;
+
+            max-width: 800px;
+
+            margin: auto;
+
+            color: #b5c5d5;
+
+            font-size: 17px;
+        }
+
+
+        /* ==========================================
+           HOME
+        ========================================== */
+
+        .hero {
+            min-height: 85vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            background:
+                radial-gradient(circle,
+                    rgba(0, 229, 255, 0.15),
+                    transparent 45%);
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero-small {
+            color: #00e5ff;
+
+            letter-spacing: 4px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+
+            line-height: 1.1;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #00e5ff;
+        }
+
+        .hero p {
+            color: #b5c5d5;
+
+            font-size: 18px;
+
+            margin-bottom: 35px;
+        }
+
+
+        /* ==========================================
+           BUTTONS
+        ========================================== */
+
+        .btn {
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            border-radius: 6px;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+            margin: 5px;
+
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #00e5ff;
+            color: #031019;
+        }
+
+        .primary:hover {
+            background: #00bcd4;
+
+            transform: translateY(-3px);
+        }
+
+        .secondary {
+            background: transparent;
+
+            border: 1px solid #00e5ff;
+
+            color: #00e5ff;
+        }
+
+        .secondary:hover {
+            background: #00e5ff;
+
+            color: #031019;
+        }
+
+
+        /* ==========================================
+           CARDS
+        ========================================== */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-top: 50px;
+        }
+
+        .card {
+            background: #0b1b2d;
+
+            border: 1px solid #19384f;
+
+            border-radius: 12px;
+
+            padding: 30px;
+
+            transition: 0.3s;
+
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            border-color: #00e5ff;
+
+            box-shadow:
+                0 10px 30px rgba(0, 229, 255, 0.15);
+        }
+
+        .card-icon {
+            font-size: 40px;
+
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+
+            color: white;
+        }
+
+        .card p {
+            color: #9fb2c6;
+        }
+
+
+        /* ==========================================
+           THREAT DETAILS
+        ========================================== */
+
+        .threat-details,
+        .safety-details {
+            display: none;
+
+            max-width: 900px;
+
+            margin: 40px auto 0;
+
+            padding: 30px;
+
+            background: #0b1b2d;
+
+            border: 1px solid #00e5ff;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 229, 255, 0.10);
+
+            animation: appear 0.4s ease;
+        }
+
+        .threat-details h2,
+        .safety-details h2 {
+            color: #00e5ff;
+
+            margin-bottom: 15px;
+
+            font-size: 28px;
+        }
+
+        .threat-details p,
+        .safety-details p {
+            color: #b5c5d5;
+
+            font-size: 17px;
+
+            margin-bottom: 20px;
+        }
+
+        .details-tip {
+            background: #091625;
+
+            border-left: 4px solid #00e5ff;
+
+            padding: 15px;
+
+            border-radius: 6px;
+
+            color: white;
+        }
+
+        .details-tip strong {
+            color: #00e5ff;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* ==========================================
+           STAY SAFE
+        ========================================== */
+
+        .safety-intro {
+            margin-top: 40px;
+        }
+
+
+        /* ==========================================
+           QUIZ
+        ========================================== */
+
+        .quiz-box {
+            max-width: 700px;
+
+            margin: 40px auto;
+
+            background: #0b1b2d;
+
+            border: 1px solid #19384f;
+
+            padding: 35px;
+
+            border-radius: 12px;
+        }
+
+        .question {
+            font-size: 20px;
+
+            margin-bottom: 20px;
+        }
+
+        .option {
+            display: block;
+
+            width: 100%;
+
+            text-align: left;
+
+            padding: 12px;
+
+            margin: 10px 0;
+
+            border: 1px solid #29455d;
+
+            border-radius: 6px;
+
+            background: #091625;
+
+            color: white;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            font-size: 15px;
+        }
+
+        .option:hover {
+            border-color: #00e5ff;
+
+            background: #102338;
+        }
+
+        .option:disabled {
+            cursor: default;
+        }
+
+        .option.correct {
+            background: #073d2a;
+
+            border-color: #00ff88;
+
+            color: #00ff88;
+        }
+
+        .option.incorrect {
+            background: #421d24;
+
+            border-color: #ff6b6b;
+
+            color: #ff6b6b;
+        }
+
+        #quiz-result {
+            margin-top: 20px;
+
+            font-size: 18px;
+
+            font-weight: bold;
+        }
+
+        .score-box {
+            text-align: center;
+
+            padding: 25px;
+
+            background: #091625;
+
+            border-radius: 10px;
+
+            margin-top: 20px;
+        }
+
+        .score-box h3 {
+            color: #00e5ff;
+
+            font-size: 28px;
+
+            margin-bottom: 10px;
+        }
+
+        .score-box p {
+            color: #b5c5d5;
+
+            font-size: 18px;
+        }
+
+
+        /* ==========================================
+           PHISHING TEST
+        ========================================== */
+
+        .email-box {
+            max-width: 750px;
+
+            margin: 40px auto;
+
+            background: white;
+
+            color: #222;
+
+            border-radius: 10px;
+
+            padding: 30px;
+        }
+
+        .email-header {
+            border-bottom: 1px solid #ddd;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .email-body {
+            background: #f4f4f4;
+
+            padding: 20px;
+
+            border-radius: 5px;
+
+            margin-bottom: 20px;
+        }
+
+        .email-body p {
+            color: #222;
+        }
+
+        .fake-link {
+            color: #0066cc;
+
+            text-decoration: underline;
+
+            word-break: break-all;
+        }
+
+        .phishing-buttons {
+            text-align: center;
+        }
+
+        .phishing-result {
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+
+            display: none;
+        }
+
+        .danger {
+            background: #ffe0e0;
+
+            color: #a00000;
+        }
+
+        .safe {
+            background: #dcffe5;
+
+            color: #006b20;
+        }
+
+
+        /* ==========================================
+           ABOUT
+        ========================================== */
+
+        .about-box {
+            max-width: 850px;
+
+            margin: 40px auto;
+
+            background: #0b1b2d;
+
+            border: 1px solid #19384f;
+
+            border-radius: 12px;
+
+            padding: 35px;
+        }
+
+        .about-box h3 {
+            color: #00e5ff;
+
+            margin: 20px 0 10px;
+        }
+
+        .about-box p {
+            color: #b5c5d5;
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        footer {
+            background: #040b14;
+
+            border-top: 1px solid #18354e;
+
+            padding: 30px;
+
+            text-align: center;
+
+            color: #71869b;
+        }
+
+        footer div {
+            margin: 5px;
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .nav-links {
+                justify-content: center;
+
+                gap: 12px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .email-box {
+                padding: 20px;
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         NAVIGATION
+    ================================================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            🛡️ CyberShield
+        </div>
+
+
+        <nav>
+
+            <ul class="nav-links">
+
+                <li>
+                    <button class="nav-button active" onclick="showPage('home', this)">
+                        Home
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-button" onclick="showPage('threats', this)">
+                        Threats
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-button" onclick="showPage('safety', this)">
+                        Stay Safe
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-button" onclick="showPage('quiz', this)">
+                        Quiz
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-button" onclick="showPage('phishing', this)">
+                        Phishing Test
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-button" onclick="showPage('about', this)">
+                        About
+                    </button>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ==================================================
+         HOME
+    ================================================== -->
+
+    <section id="home" class="page active-page">
+
+        <div class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-small">
+                    CYBER SECURITY AWARENESS
+                </div>
+
+
+                <h1>
+                    Stay Safe in the
+                    <span>Digital World</span>
+                </h1>
+
+
+                <p>
+                    Learn how to identify cyber threats,
+                    protect your information and stay safe
+                    online.
+                </p>
+
+
+                <button class="btn primary" onclick="showPageById('threats')">
+
+                    Explore Threats
+
+                </button>
+
+
+                <button class="btn secondary" onclick="showPageById('quiz')">
+
+                    Take Quiz
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Why Cyber Security Awareness?
+            </h2>
+
+
+            <p class="section-text">
+
+                Cyber security awareness helps people understand
+                online risks and make safer decisions when using
+                computers, smartphones and the internet.
+
+            </p>
+
+
+            <div class="cards">
+
+
+                <div class="card" onclick="showPageById('phishing')">
+
+                    <div class="card-icon">
+                        🎣
+                    </div>
+
+                    <h3>
+                        Identify Phishing
+                    </h3>
+
+                    <p>
+                        Learn how to recognize fake emails,
+                        messages and websites.
+                    </p>
+
+                </div>
+
+
+                <div class="card" onclick="showPageById('safety')">
+
+                    <div class="card-icon">
+                        🔐
+                    </div>
+
+                    <h3>
+                        Protect Accounts
+                    </h3>
+
+                    <p>
+                        Learn about strong passwords and
+                        multi-factor authentication.
+                    </p>
+
+                </div>
+
+
+                <div class="card" onclick="showPageById('quiz')">
+
+                    <div class="card-icon">
+                        🎯
+                    </div>
+
+                    <h3>
+                        Test Your Knowledge
+                    </h3>
+
+                    <p>
+                        Take the cyber security quiz and
+                        check your awareness.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         THREATS
+    ================================================== -->
+
+    <section id="threats" class="page">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Common Cyber Threats
+            </h2>
+
+
+            <p class="section-text">
+
+                Understanding common cyber threats is the first
+                step toward protecting yourself online.
+
+            </p>
+
+
+            <div class="cards">
+
+
+                <!-- 1 -->
+
+                <div class="card" onclick="showThreat('phishing')">
+
+                    <div class="card-icon">
+                        🎣
+                    </div>
+
+                    <h3>
+                        Phishing
+                    </h3>
+
+                    <p>
+                        Fake emails, messages or websites
+                        designed to steal information.
+                    </p>
+
+                </div>
+
+
+                <!-- 2 -->
+
+                <div class="card" onclick="showThreat('malware')">
+
+                    <div class="card-icon">
+                        🦠
+                    </div>
+
+                    <h3>
+                        Malware
+                    </h3>
+
+                    <p>
+                        Malicious software that can damage
+                        systems or steal information.
+                    </p>
+
+                </div>
+
+
+                <!-- 3 -->
+
+                <div class="card" onclick="showThreat('ransomware')">
+
+                    <div class="card-icon">
+                        🔒
+                    </div>
+
+                    <h3>
+                        Ransomware
+                    </h3>
+
+                    <p>
+                        Malware that can encrypt files and
+                        demand payment.
+                    </p>
+
+                </div>
+
+
+                <!-- 4 -->
+
+                <div class="card" onclick="showThreat('social')">
+
+                    <div class="card-icon">
+                        🎭
+                    </div>
+
+                    <h3>
+                        Social Engineering
+                    </h3>
+
+                    <p>
+                        Manipulating people into revealing
+                        information or taking unsafe actions.
+                    </p>
+
+                </div>
+
+
+                <!-- 5 -->
+
+                <div class="card" onclick="showThreat('password')">
+
+                    <div class="card-icon">
+                        🔑
+                    </div>
+
+                    <h3>
+                        Password Attacks
+                    </h3>
+
+                    <p>
+                        Attempts to guess, steal or reuse
+                        passwords.
+                    </p>
+
+                </div>
+
+
+                <!-- 6 -->
+
+                <div class="card" onclick="showThreat('identity')">
+
+                    <div class="card-icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        Identity Theft
+                    </h3>
+
+                    <p>
+                        Using stolen personal information
+                        for fraudulent activities.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div id="threat-details" class="threat-details">
+
+                <h2 id="threat-title">
+                    Select a threat
+                </h2>
+
+
+                <p id="threat-description">
+                    Click any threat above to learn more.
+                </p>
+
+
+                <div id="threat-warning" class="details-tip">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         STAY SAFE
+    ================================================== -->
+
+    <section id="safety" class="page">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Stay Safe Online
+            </h2>
+
+
+            <p class="section-text">
+
+                Click any option below to learn how
+                you can protect yourself online.
+
+            </p>
+
+
+            <div class="cards">
+
+
+                <!-- 1 -->
+
+                <div class="card" onclick="showSafety('password')">
+
+                    <div class="card-icon">
+                        🔐
+                    </div>
+
+                    <h3>
+                        Use Strong Passwords
+                    </h3>
+
+                    <p>
+                        Create long and unique passwords
+                        for your accounts.
+                    </p>
+
+                </div>
+
+
+                <!-- 2 -->
+
+                <div class="card" onclick="showSafety('mfa')">
+
+                    <div class="card-icon">
+                        🛡️
+                    </div>
+
+                    <h3>
+                        Enable MFA
+                    </h3>
+
+                    <p>
+                        Add another layer of protection
+                        to your accounts.
+                    </p>
+
+                </div>
+
+
+                <!-- 3 -->
+
+                <div class="card" onclick="showSafety('links')">
+
+                    <div class="card-icon">
+                        🎣
+                    </div>
+
+                    <h3>
+                        Be Careful With Links
+                    </h3>
+
+                    <p>
+                        Check links before clicking
+                        suspicious messages.
+                    </p>
+
+                </div>
+
+
+                <!-- 4 -->
+
+                <div class="card" onclick="showSafety('updates')">
+
+                    <div class="card-icon">
+                        🔄
+                    </div>
+
+                    <h3>
+                        Keep Software Updated
+                    </h3>
+
+                    <p>
+                        Install security updates for
+                        your devices and applications.
+                    </p>
+
+                </div>
+
+
+                <!-- 5 -->
+
+                <div class="card" onclick="showSafety('privacy')">
+
+                    <div class="card-icon">
+                        📱
+                    </div>
+
+                    <h3>
+                        Protect Personal Information
+                    </h3>
+
+                    <p>
+                        Keep passwords and sensitive
+                        information private.
+                    </p>
+
+                </div>
+
+
+                <!-- 6 -->
+
+                <div class="card" onclick="showSafety('backup')">
+
+                    <div class="card-icon">
+                        💾
+                    </div>
+
+                    <h3>
+                        Back Up Important Files
+                    </h3>
+
+                    <p>
+                        Keep copies of important files
+                        in a safe location.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAFETY DETAILS -->
+
+            <div id="safety-details" class="safety-details">
+
+                <h2 id="safety-title">
+                    Select a safety tip
+                </h2>
+
+
+                <p id="safety-description">
+                    Click any option above to learn more.
+                </p>
+
+
+                <div id="safety-tip" class="details-tip">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         QUIZ
+    ================================================== -->
+
+    <section id="quiz" class="page">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Cyber Security Quiz
+            </h2>
+
+
+            <p class="section-text">
+                Test your cyber security awareness.
+            </p>
+
+
+            <div class="quiz-box">
+
+
+                <div id="quiz-question" class="question">
+
+                    Loading question...
+
+                </div>
+
+
+                <div id="quiz-options"></div>
+
+
+                <div id="quiz-result"></div>
+
+
+                <button id="next-question" class="btn primary" style="display:none;" onclick="nextQuestion()">
+
+                    Next Question
+
+                </button>
+
+
+                <button id="restart-quiz" class="btn secondary" style="display:none;" onclick="restartQuiz()">
+
+                    Restart Quiz
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         PHISHING TEST
+    ================================================== -->
+
+    <section id="phishing" class="page">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Phishing Test
+            </h2>
+
+
+            <p class="section-text">
+
+                Look at the example email and decide
+                whether it is legitimate or phishing.
+
+            </p>
+
+
+            <div class="email-box">
+
+
+                <div class="email-header">
+
+                    <strong>From:</strong>
+                    security-alert@example-login.com
+
+                    <br>
+
+                    <strong>Subject:</strong>
+                    URGENT: Your account will be suspended!
+
+                </div>
+
+
+                <div class="email-body">
+
+                    <p>
+                        Dear Customer,
+                    </p>
+
+
+                    <br>
+
+
+                    <p>
+                        We detected unusual activity on your
+                        account. Your account will be permanently
+                        suspended within 24 hours.
+                    </p>
+
+
+                    <br>
+
+
+                    <p>
+                        Click the link below immediately to
+                        verify your account:
+                    </p>
+
+
+                    <br>
+
+
+                    <p class="fake-link">
+                        http://example-login-security.com/verify
+                    </p>
+
+
+                    <br>
+
+
+                    <p>
+                        Failure to verify your account will
+                        result in permanent suspension.
+                    </p>
+
+
+                    <br>
+
+
+                    <p>
+                        Thank you,<br>
+                        Security Team
+                    </p>
+
+                </div>
+
+
+                <div class="phishing-buttons">
+
+
+                    <button class="btn primary" onclick="phishingAnswer(true)">
+
+                        🚨 This is Phishing
+
+                    </button>
+
+
+                    <button class="btn secondary" onclick="phishingAnswer(false)">
+
+                        ✅ This is Safe
+
+                    </button>
+
+                </div>
+
+
+                <div id="phishing-result" class="phishing-result">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         ABOUT
+    ================================================== -->
+
+    <section id="about" class="page">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                About CyberShield
+            </h2>
+
+
+            <div class="about-box">
+
+
+                <h3>
+                    🛡️ What is CyberShield?
+                </h3>
+
+
+                <p>
+
+                    CyberShield is a cyber security awareness
+                    project designed to help people understand
+                    common online threats and develop safer
+                    digital habits.
+
+                </p>
+
+
+                <h3>
+                    🎯 Our Goal
+                </h3>
+
+
+                <p>
+
+                    The goal of this project is to make cyber
+                    security easier to understand through simple
+                    explanations, interactive quizzes and
+                    phishing awareness tests.
+
+                </p>
+
+
+                <h3>
+                    🔐 Stay Protected
+                </h3>
+
+
+                <p>
+
+                    Always think before clicking links, use strong
+                    passwords, enable multi-factor authentication
+                    and keep your software updated.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
+    <footer>
+
+        <div>
+            🛡️ CyberShield
+        </div>
+
+        <div>
+            Cyber Security Awareness Project
+        </div>
+
+        <div>
+            © 2026 CyberShield
+        </div>
+
+    </footer>
+
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    ================================================== -->
+
+    <script>
+
+
+        /* ==========================================
+           PAGE NAVIGATION
+        ========================================== */
+
+        function showPage(pageId, clickedButton) {
+
+            const pages =
+                document.querySelectorAll(".page");
+
+
+            pages.forEach(function (page) {
+
+                page.classList.remove("active-page");
+
+            });
+
+
+            const selectedPage =
+                document.getElementById(pageId);
+
+
+            if (selectedPage) {
+
+                selectedPage.classList.add("active-page");
+
+            }
+
+
+            const buttons =
+                document.querySelectorAll(".nav-button");
+
+
+            buttons.forEach(function (button) {
+
+                button.classList.remove("active");
+
+            });
+
+
+            if (clickedButton) {
+
+                clickedButton.classList.add("active");
+
+            }
+
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+
+        /* ==========================================
+           HOME CARD NAVIGATION
+        ========================================== */
+
+        function showPageById(pageId) {
+
+            const pages =
+                document.querySelectorAll(".page");
+
+
+            pages.forEach(function (page) {
+
+                page.classList.remove("active-page");
+
+            });
+
+
+            const page =
+                document.getElementById(pageId);
+
+
+            if (page) {
+
+                page.classList.add("active-page");
+
+            }
+
+
+            const buttons =
+                document.querySelectorAll(".nav-button");
+
+
+            buttons.forEach(function (button) {
+
+                button.classList.remove("active");
+
+            });
+
+
+            buttons.forEach(function (button) {
+
+                const text =
+                    button.textContent
+                        .trim()
+                        .toLowerCase();
+
+
+                if (
+                    (pageId === "home" &&
+                        text === "home") ||
+
+                    (pageId === "threats" &&
+                        text === "threats") ||
+
+                    (pageId === "safety" &&
+                        text === "stay safe") ||
+
+                    (pageId === "quiz" &&
+                        text === "quiz") ||
+
+                    (pageId === "phishing" &&
+                        text === "phishing test") ||
+
+                    (pageId === "about" &&
+                        text === "about")
+                ) {
+
+                    button.classList.add("active");
+
+                }
+
+            });
+
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+
+        /* ==========================================
+           THREAT INFORMATION
+        ========================================== */
+
+        const threatInformation = {
+
+
+            phishing: {
+
+                title: "🎣 Phishing",
+
+                description:
+                    "Phishing is a cyber attack where criminals use fake emails, messages or websites to trick people into giving away passwords, financial information or other sensitive data.",
+
+                tip:
+                    "<strong>How to stay safe:</strong> Check the sender address carefully, avoid suspicious links and never provide passwords through unexpected emails or messages."
+
+            },
+
+
+            malware: {
+
+                title: "🦠 Malware",
+
+                description:
+                    "Malware is malicious software that can damage your computer, steal information or give criminals unauthorized access to your device.",
+
+                tip:
+                    "<strong>How to stay safe:</strong> Keep your software updated, use trusted security software and avoid downloading files from unknown sources."
+
+            },
+
+
+            ransomware: {
+
+                title: "🔒 Ransomware",
+
+                description:
+                    "Ransomware is malware that can encrypt or lock your files and demand payment from victims.",
+
+                tip:
+                    "<strong>How to stay safe:</strong> Keep regular backups of important files and avoid suspicious attachments, downloads and links."
+
+            },
+
+
+            social: {
+
+                title: "🎭 Social Engineering",
+
+                description:
+                    "Social engineering involves manipulating people into revealing confidential information or performing actions that help an attacker.",
+
+                tip:
+                    "<strong>How to stay safe:</strong> Be cautious of unexpected requests and verify someone's identity before sharing information."
+
+            },
+
+
+            password: {
+
+                title: "🔑 Password Attacks",
+
+                description:
+                    "Password attacks occur when criminals attempt to guess, steal or reuse passwords to gain access to online accounts.",
+
+                tip:
+                    "<strong>How to stay safe:</strong> Use long, unique passwords and enable multi-factor authentication."
+
+            },
+
+
+            identity: {
+
+                title: "👤 Identity Theft",
+
+                description:
+                    "Identity theft occurs when criminals obtain and misuse someone's personal information for fraudulent activities.",
+
+                tip:
+                    "<strong>How to stay safe:</strong> Protect personal information and monitor important accounts for suspicious activity."
+
+            }
+
+        };
+
+
+
+        /* ==========================================
+           SHOW THREAT
+        ========================================== */
+
+        function showThreat(threat) {
+
+
+            const selected =
+                threatInformation[threat];
+
+
+            if (!selected) {
+
+                return;
+
+            }
+
+
+            const details =
+                document.getElementById(
+                    "threat-details"
+                );
+
+
+            document.getElementById(
+                "threat-title"
+            ).textContent =
+                selected.title;
+
+
+            document.getElementById(
+                "threat-description"
+            ).textContent =
+                selected.description;
+
+
+            document.getElementById(
+                "threat-warning"
+            ).innerHTML =
+                selected.tip;
+
+
+            details.style.display =
+                "block";
+
+
+            setTimeout(function () {
+
+                details.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "center"
+
+                });
+
+            }, 100);
+
+        }
+
+
+
+        /* ==========================================
+           STAY SAFE INFORMATION
+        ========================================== */
+
+        const safetyInformation = {
+
+
+            password: {
+
+                title: "🔐 Use Strong Passwords",
+
+                description:
+                    "Strong passwords make it harder for attackers to gain access to your online accounts. A good password should be long, unique and difficult to guess.",
+
+                tip:
+                    "<strong>Safety tip:</strong> Use a different password for each important account. Consider using a password manager to create and store unique passwords."
+
+            },
+
+
+            mfa: {
+
+                title: "🛡️ Enable Multi-Factor Authentication",
+
+                description:
+                    "Multi-Factor Authentication, or MFA, adds an additional verification step when you sign in. This provides protection even if someone obtains your password.",
+
+                tip:
+                    "<strong>Safety tip:</strong> Turn on MFA for email, banking, social media and other important accounts whenever it is available."
+
+            },
+
+
+            links: {
+
+                title: "🎣 Be Careful With Links",
+
+                description:
+                    "Criminals often use links in emails, text messages and social media to direct people to fake websites or malicious downloads.",
+
+                tip:
+                    "<strong>Safety tip:</strong> Before clicking, check where a link leads. Be especially careful with unexpected messages that create urgency or ask for sensitive information."
+
+            },
+
+
+            updates: {
+
+                title: "🔄 Keep Software Updated",
+
+                description:
+                    "Software updates often contain security fixes that protect your device against known vulnerabilities.",
+
+                tip:
+                    "<strong>Safety tip:</strong> Enable automatic updates when appropriate and regularly update your operating system, browser and applications."
+
+            },
+
+
+            privacy: {
+
+                title: "📱 Protect Personal Information",
+
+                description:
+                    "Personal information such as passwords, financial details and identity documents can be valuable to criminals.",
+
+                tip:
+                    "<strong>Safety tip:</strong> Share only the information that is necessary. Avoid posting sensitive personal details publicly."
+
+            },
+
+
+            backup: {
+
+                title: "💾 Back Up Important Files",
+
+                description:
+                    "Backups help you recover important documents, photos and other files if your device is lost, damaged or affected by malware.",
+
+                tip:
+                    "<strong>Safety tip:</strong> Keep regular backups of important files and make sure you can recover them when needed."
+
+            }
+
+        };
+
+
+
+        /* ==========================================
+           SHOW SAFETY INFORMATION
+        ========================================== */
+
+        function showSafety(safety) {
+
+
+            const selected =
+                safetyInformation[safety];
+
+
+            if (!selected) {
+
+                return;
+
+            }
+
+
+            const details =
+                document.getElementById(
+                    "safety-details"
+                );
+
+
+            document.getElementById(
+                "safety-title"
+            ).textContent =
+                selected.title;
+
+
+            document.getElementById(
+                "safety-description"
+            ).textContent =
+                selected.description;
+
+
+            document.getElementById(
+                "safety-tip"
+            ).innerHTML =
+                selected.tip;
+
+
+            details.style.display =
+                "block";
+
+
+            setTimeout(function () {
+
+                details.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "center"
+
+                });
+
+            }, 100);
+
+        }
+
+
+
+        /* ==========================================
+           QUIZ QUESTIONS
+        ========================================== */
+
+        const quizQuestions = [
+
+
+            {
+
+                question:
+                    "What should you do if you receive a suspicious email asking for your password?",
+
+                options: [
+
+                    "Click the link and enter your password",
+
+                    "Reply with your password",
+
+                    "Ignore it and verify the sender through another method",
+
+                    "Forward it to everyone"
+
+                ],
+
+                answer: 2
+
+            },
+
+
+            {
+
+                question:
+                    "Which password is the strongest?",
+
+                options: [
+
+                    "password123",
+
+                    "John2000",
+
+                    "12345678",
+
+                    "T!ger#92Moon$River"
+
+                ],
+
+                answer: 3
+
+            },
+
+
+            {
+
+                question:
+                    "What does MFA stand for?",
+
+                options: [
+
+                    "Multi-Factor Authentication",
+
+                    "Main Firewall Access",
+
+                    "Multiple File Application",
+
+                    "Mobile Firewall Account"
+
+                ],
+
+                answer: 0
+
+            },
+
+
+            {
+
+                question:
+                    "What is phishing?",
+
+                options: [
+
+                    "A type of computer hardware",
+
+                    "A trick used to steal information",
+
+                    "A method of backing up files",
+
+                    "A type of antivirus"
+
+                ],
+
+                answer: 1
+
+            },
+
+
+            {
+
+                question:
+                    "Why should you install security updates?",
+
+                options: [
+
+                    "To make your computer heavier",
+
+                    "To remove your files",
+
+                    "To fix security vulnerabilities",
+
+                    "To disable your antivirus"
+
+                ],
+
+                answer: 2
+
+            }
+
+        ];
+
+
+
+        let currentQuestion = 0;
+
+        let score = 0;
+
+
+
+        /* ==========================================
+           LOAD QUIZ
+        ========================================== */
+
+        function loadQuestion() {
+
+
+            const questionElement =
+                document.getElementById(
+                    "quiz-question"
+                );
+
+
+            const optionsElement =
+                document.getElementById(
+                    "quiz-options"
+                );
+
+
+            const resultElement =
+                document.getElementById(
+                    "quiz-result"
+                );
+
+
+            const nextButton =
+                document.getElementById(
+                    "next-question"
+                );
+
+
+            const restartButton =
+                document.getElementById(
+                    "restart-quiz"
+                );
+
+
+            resultElement.textContent = "";
+
+            resultElement.innerHTML = "";
+
+            optionsElement.innerHTML = "";
+
+
+            nextButton.style.display =
+                "none";
+
+
+            restartButton.style.display =
+                "none";
+
+
+            if (
+                currentQuestion >=
+                quizQuestions.length
+            ) {
+
+
+                questionElement.textContent =
+                    "🎉 Quiz Completed!";
+
+
+                resultElement.innerHTML =
+
+                    "<div class='score-box'>" +
+
+                    "<h3>Your Score</h3>" +
+
+                    "<p>" +
+
+                    score +
+
+                    " / " +
+
+                    quizQuestions.length +
+
+                    "</p>" +
+
+                    "</div>";
+
+
+                restartButton.style.display =
+                    "inline-block";
+
+
+                return;
+
+            }
+
+
+            const question =
+                quizQuestions[currentQuestion];
+
+
+            questionElement.textContent =
+
+                (currentQuestion + 1) +
+
+                ". " +
+
+                question.question;
+
+
+            question.options.forEach(
+                function (option, index) {
+
+
+                    const button =
+                        document.createElement(
+                            "button"
+                        );
+
+
+                    button.className =
+                        "option";
+
+
+                    button.textContent =
+                        option;
+
+
+                    button.onclick =
+                        function () {
+
+                            checkAnswer(index);
+
+                        };
+
+
+                    optionsElement.appendChild(
+                        button
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* ==========================================
+           CHECK ANSWER
+        ========================================== */
+
+        function checkAnswer(selectedAnswer) {
+
+
+            const question =
+                quizQuestions[currentQuestion];
+
+
+            const resultElement =
+                document.getElementById(
+                    "quiz-result"
+                );
+
+
+            const optionButtons =
+                document.querySelectorAll(
+                    ".option"
+                );
+
+
+            optionButtons.forEach(
+                function (button) {
+
+                    button.disabled = true;
+
+                }
+            );
+
+
+            if (
+                selectedAnswer ===
+                question.answer
+            ) {
+
+
+                score++;
+
+
+                optionButtons[
+                    selectedAnswer
+                ].classList.add(
+                    "correct"
+                );
+
+
+                resultElement.textContent =
+                    "✅ Correct!";
+
+
+                resultElement.style.color =
+                    "#00ff88";
+
+            }
+
+            else {
+
+
+                optionButtons[
+                    selectedAnswer
+                ].classList.add(
+                    "incorrect"
+                );
+
+
+                optionButtons[
+                    question.answer
+                ].classList.add(
+                    "correct"
+                );
+
+
+                resultElement.textContent =
+
+                    "❌ Incorrect! The correct answer is: " +
+
+                    question.options[
+                    question.answer
+                    ];
+
+
+                resultElement.style.color =
+                    "#ff6b6b";
+
+            }
+
+
+            document.getElementById(
+                "next-question"
+            ).style.display =
+                "inline-block";
+
+        }
+
+
+
+        /* ==========================================
+           NEXT QUESTION
+        ========================================== */
+
+        function nextQuestion() {
+
+            currentQuestion++;
+
+            loadQuestion();
+
+        }
+
+
+
+        /* ==========================================
+           RESTART QUIZ
+        ========================================== */
+
+        function restartQuiz() {
+
+            currentQuestion = 0;
+
+            score = 0;
+
+            loadQuestion();
+
+        }
+
+
+
+        /* ==========================================
+           PHISHING TEST
+        ========================================== */
+
+        function phishingAnswer(isPhishing) {
+
+
+            const result =
+                document.getElementById(
+                    "phishing-result"
+                );
+
+
+            result.style.display =
+                "block";
+
+
+            if (isPhishing) {
+
+
+                result.className =
+                    "phishing-result safe";
+
+
+                result.innerHTML =
+
+                    "✅ Correct! This is a phishing email." +
+
+                    "<br><br>" +
+
+                    "Warning signs include urgency, " +
+
+                    "a suspicious sender address, " +
+
+                    "and a suspicious verification link.";
+
+            }
+
+            else {
+
+
+                result.className =
+                    "phishing-result danger";
+
+
+                result.innerHTML =
+
+                    "❌ Not quite. This is a phishing email." +
+
+                    "<br><br>" +
+
+                    "Look for warning signs such as urgent " +
+
+                    "requests, suspicious links and unfamiliar " +
+
+                    "sender addresses.";
+
+            }
+
+        }
+
+
+
+        /* ==========================================
+           START QUIZ
+        ========================================== */
+
+        loadQuestion();
+
+    </script>
+
+
+</body>
+
+</html>
